@@ -6,6 +6,17 @@ import { emitDrop, emitHover, onFileDrop } from './platform';
 import { useSettings } from './settings';
 import './kit.css';
 
+/** 工具自己的主色：亮色直接用，暗色调亮一些；浅底色由主色混出来。没有时用 palette 的主色 */
+export function applyAccent(el: HTMLElement, a: string | undefined, mode: string) {
+  if (a) {
+    el.style.setProperty('--primary', mode === 'dark' ? `color-mix(in srgb, ${a} 70%, white)` : a);
+    el.style.setProperty('--primary-soft', mode === 'dark' ? `color-mix(in srgb, ${a} 22%, #111)` : `color-mix(in srgb, ${a} 12%, white)`);
+  } else {
+    el.style.removeProperty('--primary');
+    el.style.removeProperty('--primary-soft');
+  }
+}
+
 /** 按抽签结果挂布局、配色、亮暗 */
 export function KitApp({ tool, meta, size = 'std' }: { tool: ToolDef; meta: ToolMeta; size?: 'std' | 'large' }) {
   const runner = useToolRunner(tool);
@@ -28,15 +39,7 @@ export function KitApp({ tool, meta, size = 'std' }: { tool: ToolDef; meta: Tool
     el.dataset.palette = meta.ui.palette;
     el.dataset.mode = mode;
     el.dataset.size = size;
-    // 工具自己的主色：亮色直接用，暗色调亮一些；浅底色由主色混出来
-    const a = meta.ui.accent;
-    if (a) {
-      el.style.setProperty('--primary', mode === 'dark' ? `color-mix(in srgb, ${a} 70%, white)` : a);
-      el.style.setProperty('--primary-soft', mode === 'dark' ? `color-mix(in srgb, ${a} 22%, #111)` : `color-mix(in srgb, ${a} 12%, white)`);
-    } else {
-      el.style.removeProperty('--primary');
-      el.style.removeProperty('--primary-soft');
-    }
+    applyAccent(el, meta.ui.accent, mode);
     el.lang = 'zh-CN';
     document.title = meta.name;
   }, [meta, mode, size]);

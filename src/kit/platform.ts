@@ -94,7 +94,7 @@ export async function runFfmpeg(args: string[], onTime?: (seconds: number) => vo
   const code = await new Promise<number | null>((resolve) => cmd.on('close', (e) => resolve(e.code)));
   signal?.removeEventListener('abort', onAbort);
   if (signal?.aborted) throw new Error('已取消');
-  if (code !== 0) throw new Error(`ffmpeg 处理失败：${tail.filter((l) => l.trim()).slice(-3).join(' / ') || `退出码 ${code}`}`);
+  if (code !== 0) throw new Error(`音视频处理失败：${tail.filter((l) => l.trim()).slice(-3).join(' / ') || `退出码 ${code}`}`);
 }
 
 /** 读取音视频时长（秒），读不到返回 0 */

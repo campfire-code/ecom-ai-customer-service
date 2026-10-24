@@ -95,7 +95,7 @@ function Results({ runner, variant, selected, onSelect }: { runner: Runner; vari
         <div key={r.item.id} className={`k-row${selected === r.item.id ? ' sel' : ''}`} onClick={() => onSelect?.(r.item.id)}>
           <Thumb row={r} runner={runner} />
           <div className="k-row-name"><span className="k-ellipsis" title={r.item.name}>{r.item.name}</span>{t.ResultBody && r.status === 'ok' && r.result && v !== 'compact' && <div className="k-row-body"><t.ResultBody item={r.item} result={r.result} /></div>}{v === 'compact' ? (r.status === 'ok' && r.result?.summary ? <small className="k-muted k-ellipsis">{r.result.summary}</small> : r.status === 'err' ? <small className="k-err-text k-ellipsis" title={r.error}>{r.error}</small> : null) : r.item.size != null && <small className="k-muted k-num">{(r.item.size / 1024).toFixed(0)} KB</small>}</div>
-          <StatusChip row={r} short={v === 'compact'} />
+          <StatusChip row={r} short={v === 'compact' || (!!t.ResultBody && r.status === 'ok')} />
           <RowActions row={r} />
           {!runner.running && r.status !== 'run' && <button className="k-icon-btn" aria-label="移除" title="移除" onClick={(e) => { e.stopPropagation(); runner.remove(r.item.id); }}><Trash2 size={14} /></button>}
         </div>

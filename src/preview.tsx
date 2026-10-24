@@ -4,6 +4,7 @@ import { mockIPC, mockWindows } from '@tauri-apps/api/mocks';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { LAYOUTS, type Page } from './kit/layouts';
+import { applyAccent } from './kit/App';
 import type { Runner, Row } from './kit/runner';
 import type { LayoutId, PaletteId, ToolMeta } from './kit/types';
 import tool from './tool';
@@ -20,6 +21,7 @@ const palette = (q.get('palette') ?? toolMeta.ui.palette) as PaletteId;
 const page = (q.get('page') ?? 'main') as Page;
 const state = q.get('state') ?? 'running';
 Object.assign(document.documentElement.dataset, { layout, palette, mode: q.get('mode') ?? 'light', size: q.get('size') ?? 'std' });
+if (!q.get('palette')) applyAccent(document.documentElement, (toolMeta as ToolMeta).ui.accent, q.get('mode') ?? 'light');
 
 function sample(i: number, done: boolean) {
   const c = document.createElement('canvas');
@@ -54,8 +56,8 @@ const runner = {
   tool, rows, stats, running: state === 'running',
   params: { ...Object.fromEntries(tool.params.map((f) => [f.key, f.default])), ...custom.params },
   setParam: noop, start: async () => {}, pause: noop, retryFailed: noop, addPaths: async () => {}, remove: noop, clear: noop, exportAll: async () => {},
-  outputDir: '/Users/篝火/下载/图片批量压缩',
-  history: [{ at: '2026-10-23T09:12:00Z', total: 24, ok: 23, failed: 1, outputDir: '/Users/篝火/下载/图片批量压缩' }],
+  outputDir: '~/下载/图片批量压缩',
+  history: [{ at: '2026-10-23T09:12:00Z', total: 24, ok: 23, failed: 1, outputDir: '~/下载/图片批量压缩' }],
   notice: custom.notice ?? (state === 'done' ? { kind: 'err' as const, text: '完成 9 个，失败 1 个，失败原因见列表' } : null),
   setNotice: noop,
   // 预览用的假上下文：读写不落盘，大模型返回固定文字
@@ -64,6 +66,6 @@ const runner = {
     mkdir: async () => {}, join: async (...p: string[]) => p.join('/'), llm: async () => '（预览）', sidecar: async () => '', ffmpeg: async () => {}, duration: async () => 0,
   },
 } as unknown as Runner;
-const meta: ToolMeta = { ...(toolMeta as ToolMeta), ui: { layout, palette } };
+const meta: ToolMeta = { ...(toolMeta as ToolMeta), ui: { ...(toolMeta as ToolMeta).ui, layout, palette } };
 const Layout = LAYOUTS[layout];
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><Layout runner={{ ...runner, tool: { ...tool, name: meta.name } } as Runner} meta={meta} hover={false} page={page} setPage={noop} /></React.StrictMode>);
