@@ -54,8 +54,8 @@ const runner = {
   tool, rows, stats, running: state === 'running',
   params: { ...Object.fromEntries(tool.params.map((f) => [f.key, f.default])), ...custom.params },
   setParam: noop, start: async () => {}, pause: noop, retryFailed: noop, addPaths: async () => {}, remove: noop, clear: noop, exportAll: async () => {},
-  outputDir: '/Users/demo/Downloads/图片批量压缩',
-  history: [{ at: '2026-10-23T09:12:00Z', total: 24, ok: 23, failed: 1, outputDir: '/Users/demo/Downloads/图片批量压缩' }],
+  outputDir: '/Users/篝火/下载/图片批量压缩',
+  history: [{ at: '2026-10-23T09:12:00Z', total: 24, ok: 23, failed: 1, outputDir: '/Users/篝火/下载/图片批量压缩' }],
   notice: custom.notice ?? (state === 'done' ? { kind: 'err' as const, text: '完成 9 个，失败 1 个，失败原因见列表' } : null),
   setNotice: noop,
   // 预览用的假上下文：读写不落盘，大模型返回固定文字

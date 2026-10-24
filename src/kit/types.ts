@@ -85,6 +85,10 @@ interface ToolBase {
   icon?: ComponentType<{ size?: number }>;
   /** 结果展示形态 */
   resultView: 'list' | 'table' | 'cards' | 'text';
+  /** 自定义空状态（还没添加内容时），用来讲清这个工具具体做什么；不填用通用的拖放区 */
+  Empty?: ComponentType<{ hover: boolean }>;
+  /** 自定义单条结果的展示（处理成功后），例如前后对比、识别出的文字；不填用通用的缩略图和一行说明 */
+  ResultBody?: ComponentType<{ item: InputItem; result: ItemResult }>;
   /** resultView=table 时的列：[键, 标题] */
   columns?: [string, string][];
   /** 并发数，默认 2 */
@@ -132,6 +136,7 @@ export interface ToolMeta {
   version: string;
   repo: string;
   license: string;
-  ui: { layout: LayoutId; palette: PaletteId };
+  /** accent：工具自己的主色（#RRGGBB），覆盖 palette 的主色 */
+  ui: { layout: LayoutId; palette: PaletteId; accent?: string };
   upstream?: { repo: string; license: string } | null;
 }

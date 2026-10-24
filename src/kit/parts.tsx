@@ -196,6 +196,8 @@ export function Summary({ runner }: { runner: Runner }) {
 }
 
 export function EmptyState({ runner, hover }: { runner: Runner; hover: boolean }) {
+  const Custom = runner.tool.mode !== 'custom' ? runner.tool.Empty : undefined;
+  if (Custom) return <div className={`k-empty-custom${hover ? ' hover' : ''}`}><Custom hover={hover} /></div>;
   return runner.tool.mode === 'batch' ? <DropZone runner={runner} hover={hover} big /> : (
     <div className="k-empty"><b>{runner.tool.name}</b><span>{runner.tool.tagline}</span>{runner.tool.mode === 'generate' && <span className="k-muted">在参数里填好内容，点「{runner.tool.generateLabel ?? '开始生成'}」</span>}</div>
   );
@@ -292,7 +294,8 @@ export function AboutPage({ meta, tagline, withTheme }: { meta: ToolMeta; taglin
         <h3>归属</h3>
         <p><span className="k-brand">{BRAND.mark}</span></p>
         <p className="k-muted">{BRAND.statement}</p>
-        <p className="k-muted">更多工具：{BRAND.store}，或访问 github.com/{BRAND.org}/toolkit-hub</p>
+        <p className="k-muted">更多工具：{BRAND.store}</p>
+        <div className="k-actions"><button className="k-btn" onClick={() => openLink(`https://github.com/${BRAND.org}/toolkit-hub`)}><ExternalLink size={15} />全部开源工具</button></div>
       </section>
       {withTheme && <ThemeSwitch />}
     </div>
