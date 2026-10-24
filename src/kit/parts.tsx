@@ -144,7 +144,7 @@ export function AddButtons({ runner, compact }: { runner: Runner; compact?: bool
   const t = runner.tool;
   return (
     <>
-      <button className="k-btn" disabled={runner.running} onClick={async () => runner.addPaths(await pickFiles(t.accept.extensions, t.accept.label))}><Plus size={15} />{compact ? '添加' : `添加${t.accept.label}`}</button>
+      <button className="k-btn" disabled={runner.running} onClick={async () => runner.addPaths(await pickFiles(t.accept.extensions, t.accept.label))}><Plus size={15} />{compact ? '添加' : `添加${/^[A-Za-z]/.test(t.accept.label) ? ' ' : ''}${t.accept.label}`}</button>
       <button className="k-btn" disabled={runner.running} onClick={async () => { const p = await pickFolder(); if (p) runner.addPaths([p]); }}><FolderPlus size={15} />{compact ? '文件夹' : '添加文件夹'}</button>
     </>
   );
@@ -191,7 +191,7 @@ export function ExportAction({ runner }: { runner: Runner }) {
 
 export function Summary({ runner }: { runner: Runner }) {
   const s = runner.stats;
-  if (!s.total) return <span className="k-muted">{runner.tool.mode === 'batch' ? `还没有添加${runner.tool.accept.label}` : '设置好参数后点「开始生成」'}</span>;
+  if (!s.total) return <span className="k-muted">{runner.tool.mode === 'batch' ? `还没有添加${/^[A-Za-z]/.test(runner.tool.accept.label) ? ' ' : ''}${runner.tool.accept.label}` : '设置好参数后点「开始生成」'}</span>;
   return <span className="k-muted k-num">共 {s.total} · 完成 {s.ok}{s.err ? ` · 失败 ${s.err}` : ''}{s.wait ? ` · 等待 ${s.wait}` : ''}</span>;
 }
 

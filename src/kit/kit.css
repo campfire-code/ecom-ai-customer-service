@@ -255,7 +255,7 @@ html[data-layout="e"] .k-btn { border-radius: 999px; }
 .d-top { height: 42px; flex: none; display: flex; align-items: center; gap: 4px; padding: 0 12px; background: var(--side); border-bottom: 1px solid var(--line); }
 .d-top b { margin-right: 12px; }
 .d-top .k-btn { height: 30px; padding: 0 10px; }
-.d-body { flex: 1; display: grid; grid-template-columns: 230px minmax(0, 1fr) 250px; min-height: 0; }
+.d-body { flex: 1; display: grid; grid-template-columns: 260px minmax(0, 1fr) 250px; min-height: 0; }
 .d-files { background: var(--side); border-right: 1px solid var(--line); display: flex; flex-direction: column; min-height: 0; }
 .d-files-hd { padding: 10px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; border-bottom: 1px solid var(--line); }
 .d-files-hd .k-muted { width: 100%; }

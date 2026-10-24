@@ -327,7 +327,7 @@ function LayoutE({ runner, meta, hover, page, setPage }: LayoutProps) {
             {rest.length > 0 && <div><button className="k-chip" onClick={() => setMore(!more)}><Settings2 size={13} />{more ? '收起选项' : `更多选项（${rest.length}）`}</button></div>}
             {more && <div className="e-more">{rest.map((f) => <FieldControl key={f.key} field={f} value={runner.params[f.key]} disabled={runner.running} onChange={(v) => runner.setParam(f.key, v)} />)}</div>}
             <Notice runner={runner} />
-            <Results runner={runner} variant="compact" />
+            <Results runner={runner} variant={runner.tool.ResultBody ? 'rows' : 'compact'} />
             </>}
           </>
         )}
