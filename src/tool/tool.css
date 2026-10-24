@@ -1,0 +1,75 @@
+/* 多平台 AI 客服：只用 kit.css 的变量，适配 6 套布局与亮暗色 */
+.cs { flex: 1; display: flex; flex-direction: column; gap: 12px; container-type: inline-size; min-width: 0; }
+.cs-tabs { display: flex; align-items: center; gap: 4px; padding: 6px 8px; position: sticky; top: 0; z-index: 3; }
+.cs-tabs > button { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border: 0; border-radius: 8px; background: none; color: var(--muted); cursor: pointer; }
+.cs-tabs > button:hover { background: var(--chip); }
+.cs-tabs > button.on { background: var(--primary-soft); color: var(--primary); font-weight: 600; }
+.cs-tabs > button i { font-style: normal; font-size: .85em; opacity: .8; font-variant-numeric: tabular-nums; }
+.cs-tabs-fill { flex: 1; }
+.cs-shop { white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; }
+.cs-shop .k-input { height: 32px; padding-top: 0; padding-bottom: 0; max-width: 220px; }
+
+.cs-reply { display: grid; grid-template-columns: minmax(280px, 5fr) minmax(0, 6fr); gap: 12px; align-items: start; }
+.cs-input { display: grid; gap: 10px; padding: 12px; position: sticky; top: 64px; }
+.cs-chat { min-height: 96px; line-height: 1.7; }
+.cs-opts { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: end; }
+.cs-opts .k-field { gap: 4px; }
+.cs-go { margin-left: auto; }
+.cs-out { min-width: 0; }
+.cs-empty { display: grid; gap: 6px; justify-items: center; text-align: center; padding: 40px 20px; }
+.cs-result { display: grid; gap: 10px; }
+.cs-card { display: grid; gap: 8px; padding: 12px 14px; border-radius: var(--radius-lg); }
+.cs-card.plain { background: var(--surface); border: 1px solid var(--line); }
+.cs-card-hd { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; }
+.cs-refs { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.cs-ref { display: inline-flex; align-items: center; gap: 3px; font-size: .82em; padding: 0 8px; border-radius: 999px; background: var(--primary-soft); color: var(--primary); line-height: 1.8; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cs-ref.none { background: var(--chip); color: var(--muted); }
+.cs-text { margin: 0; white-space: pre-wrap; line-height: 1.75; font-size: 1.02em; user-select: text; }
+.cs-hit { background: #FFE58A; color: #3F2A00; border-radius: 3px; padding: 0 2px; }
+:root[data-mode="dark"] .cs-hit, html[data-mode="dark"] .cs-hit { background: #7A5C00; color: #FFEFB8; }
+.cs-warn { display: flex; gap: 8px; align-items: flex-start; padding: 6px 10px; border-radius: min(var(--radius), 8px); background: var(--warn-soft); color: var(--warn); font-size: .92em; line-height: 1.55; }
+.cs-warn svg { flex: none; margin-top: 3px; }
+.cs-card-ft { display: flex; align-items: center; gap: 8px; }
+.cs-grow { flex: 1; }
+.cs-none { display: grid; gap: 8px; padding: 14px; border-left: 4px solid var(--warn); }
+.cs-none header { display: flex; align-items: center; gap: 8px; color: var(--warn); font-size: 1.08em; }
+.cs-none p { margin: 0; line-height: 1.7; }
+.cs-none h4 { margin: 4px 0 0; font-size: .95em; color: var(--muted); font-weight: 600; }
+.cs-hits { padding: 10px 14px; }
+.cs-hits summary { cursor: pointer; display: flex; align-items: center; gap: 6px; color: var(--muted); }
+.cs-hit-row { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); display: grid; gap: 3px; }
+.cs-hit-row p { margin: 0; line-height: 1.65; white-space: pre-wrap; }
+.cs-tag { display: inline-block; font-size: .8em; padding: 0 7px; border-radius: 999px; background: var(--chip); color: var(--muted); line-height: 1.7; margin-left: 6px; flex: none; }
+.cs-tag.shared { background: var(--ok-soft); color: var(--ok); }
+
+.cs-kb { display: grid; gap: 10px; }
+.cs-kb-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px; }
+.cs-q { flex: 1; min-width: 160px; }
+.cs-tip { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 8px 12px; border-radius: min(var(--radius), 10px); background: var(--primary-soft); }
+.cs-tip span { flex: 1; min-width: 200px; }
+.cs-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.cs-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+.cs-item { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; border-radius: var(--radius-lg); min-width: 0; }
+.cs-item header { display: flex; align-items: center; min-width: 0; }
+.cs-item header b { flex: 0 1 auto; }
+.cs-item p { margin: 0; line-height: 1.65; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-wrap; }
+.cs-item footer { margin-top: auto; display: flex; justify-content: flex-end; gap: 2px; }
+
+.cs-words { display: grid; gap: 10px; padding: 14px; max-width: 720px; }
+.cs-words h3, .cs-form h3 { margin: 0; }
+.cs-words p { margin: 0; line-height: 1.65; }
+.cs-words-ta { font-family: inherit; line-height: 1.6; }
+
+.cs-mask { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 20px; background: rgba(0, 0, 0, .38); }
+.cs-dialog { width: min(560px, 100%); max-height: calc(100vh - 40px); overflow: auto; padding: 18px 20px; box-shadow: 0 20px 48px rgba(0, 0, 0, .28); }
+.cs-form { display: grid; gap: 14px; }
+.cs-form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.cs-form-ft { display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
+.cs-form-ft .k-help { margin-right: auto; }
+.cs-danger { background: var(--err); border-color: var(--err); color: var(--on-primary); }
+
+@container (max-width: 700px) {
+  .cs-reply { grid-template-columns: minmax(0, 1fr); }
+  .cs-input { position: static; }
+  .cs-tabs { flex-wrap: wrap; }
+}

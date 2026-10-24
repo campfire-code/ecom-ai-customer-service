@@ -1,0 +1,13 @@
+{
+  "id": "e25",
+  "slug": "ecom-ai-customer-service",
+  "name": "多平台 AI 客服",
+  "version": "0.1.0",
+  "repo": "campfire-code/ecom-ai-customer-service",
+  "license": "MIT",
+  "ui": {
+    "layout": "e",
+    "palette": "orange"
+  },
+  "upstream": null
+}
