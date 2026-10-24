@@ -179,6 +179,8 @@ function LayoutB({ runner, meta, hover, page, setPage }: LayoutProps) {
 }
 
 function Preview({ row, runner }: { row: Row; runner: Runner }) {
+  const Body = runner.tool.ResultBody;
+  if (Body && row.status === 'ok' && row.result) return <div className="k-preview-meta"><StatusChip row={row} short /><Body item={row.item} result={row.result} /></div>;
   if (runner.tool.type === 'media') {
     const out = row.status === 'ok' && row.result?.preview;
     return (
@@ -235,7 +237,8 @@ function LayoutC({ runner, meta, hover, page, setPage }: LayoutProps) {
             {batch && view === 0 && (
               <div className="c-card">
                 <h1>{runner.tool.name}</h1><p className="k-muted">{runner.tool.tagline}</p>
-                <DropZone runner={runner} hover={hover} big />
+                {runner.tool.Empty && !runner.rows.length && <EmptyState runner={runner} hover={hover} />}
+                <DropZone runner={runner} hover={hover} big={!runner.tool.Empty} />
                 {!!runner.rows.length && <><Summary runner={runner} /><Results runner={runner} variant="cards" /></>}
               </div>
             )}
@@ -316,7 +319,8 @@ function LayoutE({ runner, meta, hover, page, setPage }: LayoutProps) {
           <>
             <h1 className="e-title">{meta.name}</h1>
             {runner.tool.mode === 'custom' ? <CustomMain runner={runner} /> : <>
-            {runner.tool.mode === 'batch' ? <DropZone runner={runner} hover={hover} /> : <p className="k-muted">{runner.tool.tagline}</p>}
+            {runner.tool.Empty && !runner.rows.length && <EmptyState runner={runner} hover={hover} />}
+            {runner.tool.mode === 'batch' ? <DropZone runner={runner} hover={hover} /> : !runner.tool.Empty && <p className="k-muted">{runner.tool.tagline}</p>}
             <div className="e-quick">
               {quick.map((f) => <FieldControl key={f.key} field={f} value={runner.params[f.key]} disabled={runner.running} onChange={(v) => runner.setParam(f.key, v)} />)}
             </div>

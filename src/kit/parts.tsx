@@ -156,7 +156,7 @@ export function DropZone({ runner, hover, big }: { runner: Runner; hover: boolea
   return (
     <button className={`k-drop${hover ? ' hover' : ''}${big ? ' big' : ''}`} disabled={runner.running} onClick={async () => runner.addPaths(await pickFiles(t.accept.extensions, t.accept.label))}>
       <Upload size={big ? 26 : 20} />
-      <span><b>把{t.accept.label}拖到这里</b>，或点击选择<br /><small>支持 {t.accept.extensions.join(' / ')}，可以拖入整个文件夹</small></span>
+      <span><b>把{t.accept.label}拖到这里</b>，或点击选择<br /><small>支持 {t.accept.extensions.map((e) => e.toUpperCase()).join(' / ')}，可以拖入整个文件夹</small></span>
     </button>
   );
 }
