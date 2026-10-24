@@ -53,7 +53,7 @@ function Results({ runner, variant, selected, onSelect }: { runner: Runner; vari
           <div key={r.item.id} className="k-text-card">
             <div className="k-text-head"><b>{r.result?.title ?? r.item.name}</b><StatusChip row={r} short /></div>
             {r.status === 'err' && <span className="k-err-text">{r.error}</span>}
-            <ResultText row={r} />
+            {t.ResultBody && r.status === 'ok' && r.result ? <t.ResultBody item={r.item} result={r.result} /> : <ResultText row={r} />}
           </div>
         ))}
       </div>
